@@ -1,7 +1,7 @@
 import { Diagnose } from '@/datas/diagnose'
 import S3 from 'aws-sdk/clients/s3'
 
-const bucketName = 'ai-fun-diagnose'; // 保存先のバケット名
+const bucketName = 'ai-fun-diagnose-s3'; // 保存先のバケット名
 
 class DiagnoseDb {
   bucket: S3
