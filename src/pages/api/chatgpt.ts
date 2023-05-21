@@ -28,8 +28,7 @@ export const call35Turbo = async (
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   // 一旦名前をプロンプトから除外
-  // const name = req.query.name as string || '名無し'
-  const name = '';
+  const name = req.query.name as string || '名無し'
   const label = req.query.label as string;
 
   if (name.length > 30) {
@@ -42,7 +41,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     return;
   }
 
-  const diagnose = await getDiagnose(label, name);
+  const diagnose = await getDiagnose(label);
 
   const prompt = diagnose.prompt.replace('$name', name);
 
@@ -54,10 +53,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   res.status(200).json({
     chat: await call35Turbo(
       prompt,
-      diagnose.maxToken,
-      diagnose.temperature,
-      diagnose.presence_penalty,
-      diagnose.frequency_penalty
-    ),
+      Number(diagnose.maxToken),
+      Number(diagnose.temperature),
+      Number(diagnose.presence_penalty),
+      Number(diagnose.frequency_penalty)
+    )
   });
 }
