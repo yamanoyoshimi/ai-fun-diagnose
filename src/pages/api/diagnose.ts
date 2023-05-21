@@ -30,6 +30,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         return
       }
       await updateDiagnose(label, updateSource)
+      res.status(200).send({})
       return
     default:
       const data = await diagnoseDb.read()
